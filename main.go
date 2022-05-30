@@ -149,8 +149,7 @@ func (app *App) RPCRoutes(routes RPCRoutes) {
 
 // Run -
 func (app *App) Run(addr string) error {
-	fs := http.FileServer(http.Dir("./public"))
-	app.router.Handle("/", fs)
+	app.router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
 	err := http.ListenAndServe(addr, app.router)
 	if err != nil {
 		return errors.Wrap(err, "error starting server")
