@@ -1,0 +1,37 @@
+{{define "content"}}
+    <h1>Content</h1>
+
+    <div x-data="{ open: false }">
+        <button @click="open = true">Expand</button>
+
+        <span x-show="open">
+          Content...
+        </span>
+    </div>
+
+    <form action="/rpc/create.post" method="POST" x-data="createPost()" @submit.prevent="submitData">
+        <input type="text" name="title" x-model="formData.title">
+        <textarea name="body" cols="30" rows="10" x-model="formData.body"></textarea>
+        <button>Submit</button>
+    </form>
+
+    <script>
+        function createPost() {
+            return {
+                formData: {
+                    title: '',
+                    body: '',
+                },
+                submitData() {
+                    fetch('/rpc/create.post', {
+                        method: 'POST',
+                        body: JSON.stringify(this.formData),
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                }
+            };
+        }
+    </script>
+{{end}}
