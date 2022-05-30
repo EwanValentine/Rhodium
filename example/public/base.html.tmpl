@@ -1,20 +1,35 @@
 {{ define "base" }}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset='utf-8'>
-	<meta name='viewport' content='width=device-width,initial-scale=1'>
 
-	<title>My App</title>
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset='utf-8'>
+		<meta name='viewport' content='width=device-width,initial-scale=1'>
 
-	<link rel='icon' type='image/png' href='/favicon.png'>
-	<link rel='stylesheet' href='/global.css'>
+		<title>My App</title>
 
-	<script src="//unpkg.com/alpinejs" defer></script>
-</head>
+		<link rel='icon' type='image/png' href='/favicon.png'>
+		<link rel='stylesheet' href='/global.css'>
 
-<body>
-	{{ template "content" . }}
-</body>
-</html>
+		<script src="//unpkg.com/alpinejs" defer></script>
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<style type="text/tailwindcss">
+			@layer utilities {
+				.content-auto {
+					content-visibility: auto;
+				}
+			}
+
+			input {
+				@apply border border-sky-500;
+			}
+		</style>
+	</head>
+
+	<body>
+		{{ template "content" . }}
+	</body>
+	</html>
+
 {{ end }}

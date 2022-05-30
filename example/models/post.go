@@ -1,10 +1,16 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+	"time"
+)
 
 // Post -
 type Post struct {
 	gorm.Model
-	Title string
-	Body  string
+	ID        uint      `json:"id"`
+	Title     string    `json:"title"`
+	Body      string    `json:"body"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }

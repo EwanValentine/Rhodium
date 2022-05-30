@@ -13,6 +13,8 @@
         <input type="text" name="title" x-model="formData.title">
         <textarea name="body" cols="30" rows="10" x-model="formData.body"></textarea>
         <button>Submit</button>
+
+        <p x-text="response"></p>
     </form>
 
     <script>
@@ -22,14 +24,28 @@
                     title: '',
                     body: '',
                 },
-                submitData() {
-                    fetch('/rpc/create.post', {
+                response: {
+                    id: '',
+                    title: '',
+                    body: '',
+                    created_at: '',
+                    updated_at: '',
+                },
+                async submitData() {
+                    const response = await fetch('/rpc/create.post', {
                         method: 'POST',
                         body: JSON.stringify(this.formData),
                         headers: {
                             'Content-Type': 'application/json',
                         },
                     })
+
+                    const json = await response.json()
+
+                    const res = JSON.stringify(json)
+                    console.log(res)
+
+                    this.response = res
                 }
             };
         }
